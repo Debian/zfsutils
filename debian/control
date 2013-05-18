@@ -9,8 +9,8 @@ Build-Depends: debhelper (>= 7.0.50~),
  libc0.1-dev (>= 2.10), kfreebsd-kernel-headers (>= 0.51),
  libgeom-dev,
  zlib1g-dev
-Vcs-Browser: http://svn.debian.org/wsvn/glibc-bsd/trunk/zfsutils/
-Vcs-Svn: svn://svn.debian.org/glibc-bsd/trunk/zfsutils/
+Vcs-Browser: http://anonscm.debian.org/viewvc/glibc-bsd/trunk/zfsutils/
+Vcs-Svn: svn://anonscm.debian.org/glibc-bsd/trunk/zfsutils/
 Standards-Version: 3.9.3
 
 Package: libuutil1
