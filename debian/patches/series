@@ -8,7 +8,6 @@ gratuitous_dependencies.diff
 03_glibc_namespace.diff
 04_stdint.diff
 06_mountd.diff
-08_libbsd.diff
 09_xdr_control.diff
 11_endian.diff
 12_freebsd.diff
