@@ -6,6 +6,7 @@ zfsutils (9.0-4) UNRELEASED; urgency=low
   [ Robert Millan ]
   * Build-depend on freebsd-glue >= 0.0.4 (and remove some of the build
     kludges).
+  * control: s/OpenSolaris/illumos/
 
  -- Guillem Jover <guillem@debian.org>  Sat, 18 May 2013 21:37:41 +0200
 
