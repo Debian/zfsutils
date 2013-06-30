@@ -1,8 +1,11 @@
+# Patches from (or merged in) upstream
+12_freebsd.diff
+
 # Mergeable material
 gratuitous_dependencies.diff
 #manpage_hyphens.diff
 
-# Unclassified
+# Other patches that might or might not be mergeable
 01_glibc_kludge.diff
 02_glibc_misc.diff
 03_glibc_namespace.diff
@@ -10,13 +13,12 @@ gratuitous_dependencies.diff
 06_mountd.diff
 09_xdr_control.diff
 11_endian.diff
-12_freebsd.diff
 13_mnttab.diff
 14_bootloader_advice.diff
 15_pthread_compat.diff
 16-wrap-cdefs.diff
 
-# Debian-specific
+# Patches that are likely to be Debian-specific
 makefile.diff
 #manpage_debian_specifics.diff
 libmd_static.diff
