@@ -1,4 +1,4 @@
-zfsutils (9.1-1) UNRELEASED; urgency=low
+zfsutils (9.1-1) experimental; urgency=low
 
   [ Guillem Jover ]
   * Switch to canonical Vcs URLs.
@@ -7,7 +7,7 @@ zfsutils (9.1-1) UNRELEASED; urgency=low
   * New upstream release.
   * control: s/OpenSolaris/illumos/
 
- -- Robert Millan <rmh@debian.org>  Tue, 09 Jul 2013 23:36:18 +0200
+ -- Robert Millan <rmh@debian.org>  Tue, 16 Jul 2013 13:27:18 +0200
 
 zfsutils (9.0-3) unstable; urgency=low
 
