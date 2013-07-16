@@ -4,7 +4,7 @@
 
 --- a/cddl/compat/opensolaris/misc/fsshare.c
 +++ b/cddl/compat/opensolaris/misc/fsshare.c
-@@ -35,7 +35,6 @@
+@@ -34,7 +34,6 @@
  #include <fcntl.h>
  #include <fsshare.h>
  #include <libutil.h>
@@ -12,7 +12,7 @@
  #include <signal.h>
  #include <stdio.h>
  #include <string.h>
-@@ -48,6 +47,9 @@
+@@ -47,6 +46,9 @@
  static void
  restart_mountd(void)
  {
@@ -22,7 +22,7 @@
  	struct pidfh *pfh;
  	pid_t mountdpid;
  
-@@ -63,6 +65,7 @@
+@@ -62,6 +64,7 @@
  	}
  	/* We have mountd(8) PID in mountdpid varible. */
  	kill(mountdpid, SIGHUP);

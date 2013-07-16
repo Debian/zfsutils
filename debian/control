@@ -6,10 +6,11 @@ Uploaders: Aurelien Jarno <aurel32@debian.org>, Robert Millan <rmh@debian.org>, 
 Build-Depends: debhelper (>= 7.0.50~),
  freebsd-buildutils (>= 9.0-5~),
  libbsd-dev (>= 0.3.0),
- libc0.1-dev (>= 2.10), kfreebsd-kernel-headers (>= 0.51),
+ libc0.1-dev (>= 2.10),
+ kfreebsd-kernel-headers (>= 9.1-2~),
  libgeom-dev,
  zlib1g-dev,
- freebsd-glue (>= 0.0.4~),
+ freebsd-glue (>= 0.0.7~),
 Vcs-Browser: http://anonscm.debian.org/viewvc/glibc-bsd/trunk/zfsutils/
 Vcs-Svn: svn://anonscm.debian.org/glibc-bsd/trunk/zfsutils/
 Standards-Version: 3.9.3

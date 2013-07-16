@@ -61,7 +61,7 @@
  		return (ENOENT);
 --- a/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_vfsops.c
 +++ b/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_vfsops.c
-@@ -1804,7 +1804,7 @@
+@@ -1810,7 +1810,7 @@
  		rrw_exit(&zfsvfs->z_teardown_lock, FTAG);
  		rw_exit(&zfsvfs->z_teardown_inactive_lock);
  
