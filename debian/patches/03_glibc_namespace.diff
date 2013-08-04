@@ -102,3 +102,14 @@
  	ssize_t		start_resid = uio->uio_resid;
  	ssize_t		tx_bytes;
  	uint64_t	end_size;
+--- a/cddl/compat/opensolaris/include/mnttab.h
++++ b/cddl/compat/opensolaris/include/mnttab.h
+@@ -28,6 +28,8 @@
+ 
+ int getmntany(FILE *fd, struct mnttab *mgetp, struct mnttab *mrefp);
+ int getmntent(FILE *fp, struct mnttab *mp);
++
++#define hasmntopt solaris_hasmntopt
+ char *hasmntopt(struct mnttab *mnt, char *opt);
+ 
+ void statfs2mnttab(struct statfs *sfs, struct mnttab *mp);

@@ -1,5 +1,6 @@
 # Patches from (or merged in) upstream
 12_freebsd.diff
+fix_implicit_warnx_declaration.diff
 
 # Mergeable material
 gratuitous_dependencies.diff

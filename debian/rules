@@ -12,7 +12,8 @@ export DH_OPTIONS
 CFLAGS = -Wall -Wno-unknown-pragmas -g -pipe -fPIC -I. \
          -D_GNU_SOURCE -DNEED_SOLARIS_BOOLEAN \
 	-isystem /usr/include/freebsd \
-	-D__va_list=__builtin_va_list
+	-Werror=implicit-function-declaration \
+	$(NULL)
 
 ifneq (,$(filter noopt,$(DEB_BUILD_OPTIONS)))
 	CFLAGS += -O0
