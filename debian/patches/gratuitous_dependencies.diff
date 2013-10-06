@@ -1,11 +1,11 @@
 --- a/cddl/lib/libzfs/Makefile
 +++ b/cddl/lib/libzfs/Makefile
-@@ -7,7 +7,7 @@
- 
+@@ -8,7 +8,7 @@
  LIB=	zfs
- DPADD=	${LIBMD} ${LIBPTHREAD} ${LIBUMEM} ${LIBUTIL}
--LDADD=	-lmd -lpthread -lumem -lutil
-+LDADD=	-lmd -lpthread -lumem -lutil -lnvpair -luutil -lgeom -lm
+ DPADD=	${LIBMD} ${LIBPTHREAD} ${LIBUMEM} ${LIBUTIL} ${LIBM} ${LIBNVPAIR} \
+ 	${LIBZFS_CORE}
+-LDADD=	-lmd -lpthread -lumem -lutil -lm -lnvpair -lzfs_core
++LDADD=	-lmd -lpthread -lumem -lutil -lzfs_core
  
  SRCS=	deviceid.c \
  	fsshare.c \
@@ -20,55 +20,3 @@
  
  # atomic.S doesn't like profiling.
  NO_PROFILE=
---- a/cddl/sbin/zfs/Makefile
-+++ b/cddl/sbin/zfs/Makefile
-@@ -23,6 +23,6 @@
- 
- DPADD=	${LIBBSDXML} ${LIBGEOM} ${LIBM} ${LIBNVPAIR} ${LIBSBUF} ${LIBUMEM} \
- 	${LIBUTIL} ${LIBUUTIL} ${LIBZFS}
--LDADD=	-lbsdxml -lgeom -lm -lnvpair -lsbuf -lumem -lutil -luutil -lzfs
-+LDADD=	-lgeom -lnvpair -lumem -lutil -luutil -lzfs
- 
- .include <bsd.prog.mk>
---- a/cddl/sbin/zpool/Makefile
-+++ b/cddl/sbin/zpool/Makefile
-@@ -28,6 +28,6 @@
- 
- DPADD=	${LIBAVL} ${LIBBSDXML} ${LIBGEOM} ${LIBM} ${LIBNVPAIR} ${LIBSBUF} \
- 	${LIBUMEM} ${LIBUTIL} ${LIBUUTIL} ${LIBZFS}
--LDADD=	-lavl -lbsdxml -lgeom -lm -lnvpair -lsbuf -lumem -lutil -luutil -lzfs
-+LDADD=	-lavl -lgeom -lnvpair -lumem -lutil -luutil -lzfs
- 
- .include <bsd.prog.mk>
---- a/cddl/usr.bin/zinject/Makefile
-+++ b/cddl/usr.bin/zinject/Makefile
-@@ -21,6 +21,6 @@
- 
- DPADD=	${LIBAVL} ${LIBGEOM} ${LIBM} ${LIBNVPAIR} ${LIBUMEM} ${LIBUUTIL} \
- 	${LIBZFS} ${LIBZPOOL}
--LDADD=	-lavl -lgeom -lm -lnvpair -lumem -luutil -lzfs -lzpool
-+LDADD=	      -lgeom -lm -lnvpair -lumem -luutil -lzfs -lzpool
- 
- .include <bsd.prog.mk>
---- a/cddl/usr.bin/ztest/Makefile
-+++ b/cddl/usr.bin/ztest/Makefile
-@@ -19,7 +19,7 @@
- 
- DPADD=	${LIBM} ${LIBNVPAIR} ${LIBUMEM} ${LIBZPOOL} \
- 	${LIBPTHREAD} ${LIBZ} ${LIBAVL}
--LDADD=	-lm -lnvpair -lumem -lzpool -lpthread -lz -lavl
-+LDADD=	-lm -lnvpair -lumem -lzpool -lpthread -lavl
- 
- CSTD=	c99
- 
---- a/cddl/usr.sbin/zdb/Makefile
-+++ b/cddl/usr.sbin/zdb/Makefile
-@@ -25,7 +25,7 @@
- 
- DPADD=	${LIBAVL} ${LIBGEOM} ${LIBM} ${LIBNVPAIR} ${LIBPTHREAD} ${LIBUMEM} \
- 	${LIBUUTIL} ${LIBZ} ${LIBZFS} ${LIBZPOOL}
--LDADD=	-lavl -lgeom -lm -lnvpair -lpthread -lumem -luutil -lz -lzfs -lzpool
-+LDADD=	-lgeom -lm -lnvpair -lpthread -lumem -luutil -lzfs -lzpool
- 
- 
- .include <bsd.prog.mk>

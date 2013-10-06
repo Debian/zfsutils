@@ -11,17 +11,16 @@
  CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libuutil/common
 --- a/cddl/lib/libzfs/Makefile
 +++ b/cddl/lib/libzfs/Makefile
-@@ -7,7 +7,12 @@
- 
+@@ -8,7 +8,11 @@
  LIB=	zfs
- DPADD=	${LIBMD} ${LIBPTHREAD} ${LIBUMEM} ${LIBUTIL}
--LDADD=	-lmd -lpthread -lumem -lutil -lnvpair -luutil -lgeom -lm
-+LDADD=	-lmd -lpthread -lumem -lnvpair -luutil -lgeom -lm -lbsd
+ DPADD=	${LIBMD} ${LIBPTHREAD} ${LIBUMEM} ${LIBUTIL} ${LIBM} ${LIBNVPAIR} \
+ 	${LIBZFS_CORE}
+-LDADD=	-lmd -lpthread -lumem -lutil -lzfs_core
++LDADD=	-lmd -lpthread -lumem -lzfs_core
 +
++LDADD+= -lbsd -lm
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
-+LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
-+LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
-+LDADD+= ${.CURDIR}/../../../cddl/lib/libavl/libavl.a
  
  SRCS=	deviceid.c \
  	fsshare.c \
@@ -42,77 +41,101 @@
  NO_PROFILE=
 --- a/cddl/sbin/zfs/Makefile
 +++ b/cddl/sbin/zfs/Makefile
-@@ -23,6 +23,12 @@
+@@ -24,6 +24,13 @@
  
- DPADD=	${LIBBSDXML} ${LIBGEOM} ${LIBM} ${LIBNVPAIR} ${LIBSBUF} ${LIBUMEM} \
- 	${LIBUTIL} ${LIBUUTIL} ${LIBZFS}
--LDADD=	-lgeom -lnvpair -lumem -lutil -luutil -lzfs
-+LDADD=	-lgeom -lnvpair -lumem -luutil -lzfs -lbsd
+ DPADD=	${LIBGEOM} ${LIBJAIL} ${LIBNVPAIR} ${LIBUMEM} \
+ 	${LIBUTIL} ${LIBUUTIL} ${LIBZFS_CORE} ${LIBZFS}
+-LDADD=	-lgeom -ljail -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
++LDADD=	-lgeom -ljail -lnvpair -lumem -luutil -lzfs_core -lzfs
 +
-+LDADD+=	-L${.CURDIR}/../../../cddl/lib/libnvpair
-+LDADD+=	-L${.CURDIR}/../../../cddl/lib/libumem
-+LDADD+=	-L${.CURDIR}/../../../cddl/lib/libuutil
-+LDADD+=	-L${.CURDIR}/../../../cddl/lib/libzfs
-+
++LDADD+=	-lbsd
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
  
  .include <bsd.prog.mk>
 --- a/cddl/sbin/zpool/Makefile
 +++ b/cddl/sbin/zpool/Makefile
-@@ -28,6 +28,12 @@
+@@ -28,6 +28,14 @@
  
- DPADD=	${LIBAVL} ${LIBBSDXML} ${LIBGEOM} ${LIBM} ${LIBNVPAIR} ${LIBSBUF} \
- 	${LIBUMEM} ${LIBUTIL} ${LIBUUTIL} ${LIBZFS}
--LDADD=	-lavl -lgeom -lnvpair -lumem -lutil -luutil -lzfs
-+LDADD=	-lgeom -lnvpair -lumem -luutil -lzfs -lbsd
+ DPADD=	${LIBAVL} ${LIBGEOM} ${LIBNVPAIR} \
+ 	${LIBUMEM} ${LIBUTIL} ${LIBUUTIL} ${LIBZFS_CORE} ${LIBZFS}
+-LDADD=	-lavl -lgeom -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
++LDADD=	-lgeom -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
 +
-+LDADD+=	-L${.CURDIR}/../../../cddl/lib/libzfs
-+LDADD+=	-L${.CURDIR}/../../../cddl/lib/libnvpair
-+LDADD+=	-L${.CURDIR}/../../../cddl/lib/libumem
-+LDADD+=	-L${.CURDIR}/../../../cddl/lib/libuutil
-+LDADD+=	${.CURDIR}/../../../cddl/lib/libavl/libavl.a
++LDADD+=	-lbsd
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
++LDADD+= ${.CURDIR}/../../../cddl/lib/libavl/libavl.a
  
  .include <bsd.prog.mk>
 --- a/cddl/usr.bin/zinject/Makefile
 +++ b/cddl/usr.bin/zinject/Makefile
-@@ -23,4 +23,11 @@
- 	${LIBZFS} ${LIBZPOOL}
- LDADD=	      -lgeom -lm -lnvpair -lumem -luutil -lzfs -lzpool
+@@ -23,4 +23,12 @@
+ 	${LIBZFS_CORE} ${LIBZFS} ${LIBZPOOL}
+ LDADD=	-lgeom -lm -lnvpair -lumem -luutil -lzfs_core -lzfs -lzpool
  
 +LDADD+= -lbsd
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzpool
 +
  .include <bsd.prog.mk>
 --- a/cddl/usr.bin/ztest/Makefile
 +++ b/cddl/usr.bin/ztest/Makefile
-@@ -19,7 +19,12 @@
+@@ -20,9 +20,18 @@
  
- DPADD=	${LIBM} ${LIBNVPAIR} ${LIBUMEM} ${LIBZPOOL} \
- 	${LIBPTHREAD} ${LIBZ} ${LIBAVL}
--LDADD=	-lm -lnvpair -lumem -lzpool -lpthread -lavl
-+LDADD=	-lm -lnvpair -lumem -lzpool -lpthread -lbsd -ldl -lrt
-+
+ DPADD=	${LIBGEOM} ${LIBM} ${LIBNVPAIR} ${LIBUMEM} ${LIBZPOOL} \
+ 	${LIBPTHREAD} ${LIBAVL} ${LIBZFS_CORE} ${LIBZFS} ${LIBUUTIL}
+-LDADD=	-lgeom -lm -lnvpair -lumem -lzpool -lpthread -lavl -lzfs_core -lzfs \
++LDADD=	-lgeom -lm -lnvpair -lumem -lzpool -lpthread -lzfs_core -lzfs \
+ 	-luutil
+ 
++LDADD+=	-lbsd -ldl -lrt
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzpool
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
 +LDADD+= ${.CURDIR}/../../../cddl/lib/libavl/libavl.a
- 
++
  CSTD=	c99
  
+ CFLAGS+= -DDEBUG=1
 --- a/cddl/usr.sbin/zdb/Makefile
 +++ b/cddl/usr.sbin/zdb/Makefile
-@@ -27,5 +27,11 @@
- 	${LIBUUTIL} ${LIBZ} ${LIBZFS} ${LIBZPOOL}
- LDADD=	-lgeom -lm -lnvpair -lpthread -lumem -luutil -lzfs -lzpool
+@@ -27,6 +27,14 @@
+ 	${LIBUUTIL} ${LIBZFS_CORE} ${LIBZFS} ${LIBZPOOL}
+ LDADD=	-lgeom -lm -lnvpair -lpthread -lumem -luutil -lzfs_core -lzfs -lzpool
  
 +LDADD+= -lbsd
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzpool
++
+ CFLAGS+=	-DDEBUG=1
+ #DEBUG_FLAGS+=	-g
  
- .include <bsd.prog.mk>
+--- a/cddl/lib/libzfs_core/Makefile
++++ b/cddl/lib/libzfs_core/Makefile
+@@ -10,6 +10,8 @@
+ DPADD=	${LIBNVPAIR}
+ LDADD=	-lnvpair
+ 
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
++
+ SRCS=	libzfs_core.c \
+ 	libzfs_core_compat.c
+ 

@@ -21,7 +21,7 @@
  #endif
 --- a/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_acl.c
 +++ b/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_acl.c
-@@ -1681,7 +1681,7 @@
+@@ -1683,7 +1683,7 @@
  			} else {
  				acl_ids->z_fgid = zfs_fuid_create_cred(zfsvfs,
  				    ZFS_GROUP, cr, &acl_ids->z_fuidp);
@@ -30,7 +30,7 @@
  				gid = acl_ids->z_fgid = dzp->z_gid;
  #else
  				gid = crgetgid(cr);
-@@ -2371,7 +2371,7 @@
+@@ -2374,7 +2374,7 @@
  
  	is_attr = ((zp->z_pflags & ZFS_XATTR) && (ZTOV(zp)->v_type == VDIR));
  
@@ -41,7 +41,7 @@
  	 * Note that not checking them is not just an optimization - without
 --- a/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_dir.c
 +++ b/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_dir.c
-@@ -919,7 +919,7 @@
+@@ -938,7 +938,7 @@
  	 * In FreeBSD, access checking for creating an EA is being done
  	 * in zfs_setextattr(),
  	 */
@@ -50,23 +50,14 @@
  	if (error = zfs_zaccess(zp, ACE_WRITE_NAMED_ATTRS, 0, B_FALSE, cr))
  		return (error);
  #endif
-@@ -1012,7 +1012,7 @@
- 
- 	if (!(flags & CREATE_XATTR_DIR)) {
- 		zfs_dirent_unlock(dl);
--#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
- 		return (ENOATTR);
- #else
- 		return (ENOENT);
 --- a/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_vfsops.c
 +++ b/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_vfsops.c
-@@ -1810,7 +1810,7 @@
- 		rrw_exit(&zfsvfs->z_teardown_lock, FTAG);
- 		rw_exit(&zfsvfs->z_teardown_inactive_lock);
+@@ -173,7 +173,7 @@
+ 	return (0);
+ }
  
--#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
- 		/*
- 		 * Some znodes might not be fully reclaimed, wait for them.
- 		 */
+-#ifndef __FreeBSD__
++#if !defined(__FreeBSD__) && !defined(__FreeBSD_kernel__)
+ static int
+ zfs_create_unique_device(dev_t *dev)
+ {

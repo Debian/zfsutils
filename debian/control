@@ -10,6 +10,7 @@ Build-Depends: debhelper (>= 7.0.50~),
  kfreebsd-kernel-headers (>= 9.1-2~),
  libgeom-dev,
  zlib1g-dev,
+ libjail-dev,
  freebsd-glue (>= 0.1.1~),
 Vcs-Browser: http://anonscm.debian.org/viewvc/glibc-bsd/trunk/zfsutils/
 Vcs-Svn: svn://anonscm.debian.org/glibc-bsd/trunk/zfsutils/

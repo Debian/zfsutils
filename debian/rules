@@ -57,6 +57,7 @@ get-orig-source:
 	         cddl/contrib/opensolaris/lib/libnvpair \
 	         cddl/contrib/opensolaris/lib/libuutil \
 	         cddl/contrib/opensolaris/lib/libzfs \
+		cddl/contrib/opensolaris/lib/libzfs_core \
 	         cddl/contrib/opensolaris/lib/libzpool \
 		 cddl/contrib/opensolaris/cmd/stat/common/ \
 	         sys/cddl/compat/opensolaris \
@@ -68,6 +69,7 @@ get-orig-source:
 	         cddl/lib/libzpool \
 	         cddl/lib/libumem \
 	         cddl/lib/libzfs \
+		cddl/lib/libzfs_core \
 	         cddl/sbin/zpool \
 	         cddl/sbin/zfs \
 	         cddl/usr.bin/zinject \
@@ -104,13 +106,18 @@ build-libumem-stamp:
 
 
 build-libzpool: build-libzpool-stamp
-build-libzpool-stamp: build-libavl build-libnvpair-stamp build-libumem build-libuutil-stamp build-libzfs-stamp
+build-libzpool-stamp: build-libavl build-libnvpair-stamp build-libumem build-libmd
 	$(PMAKE) -C $(CURDIR)/cddl/lib/libzpool
 	touch $@
 
 build-libzfs: build-libzfs-stamp
-build-libzfs-stamp: build-libnvpair-stamp build-libuutil-stamp build-libumem-stamp build-libavl-stamp build-libmd-stamp
+build-libzfs-stamp: build-libumem build-libzfs_core
 	$(PMAKE) -C $(CURDIR)/cddl/lib/libzfs
+	touch $@
+
+build-libzfs_core: build-libzfs_core-stamp
+build-libzfs_core-stamp: build-libnvpair
+	$(PMAKE) -C $(CURDIR)/cddl/lib/libzfs_core
 	touch $@
 
 build-libmd: build-libmd-stamp
@@ -124,7 +131,9 @@ build-libavl-stamp:
 	touch $@
 
 build-zfsutils: build-zfsutils-stamp
-build-zfsutils-stamp: build-libzfs-stamp build-libnvpair-stamp build-libuutil-stamp build-libumem build-libzpool
+build-zfsutils-stamp: build-libzfs \
+		build-libzfs_core \
+		build-libnvpair-stamp build-libuutil-stamp build-libumem build-libzpool
 	$(PMAKE) -C $(CURDIR)/cddl/sbin/zpool
 	$(PMAKE) -C $(CURDIR)/cddl/sbin/zfs
 
@@ -141,6 +150,7 @@ clean:
 	$(PMAKE) -C $(CURDIR)/cddl/lib/libuutil clean
 
 	$(PMAKE) -C $(CURDIR)/cddl/lib/libzfs clean
+	$(PMAKE) -C $(CURDIR)/cddl/lib/libzfs_core clean
 
 	$(PMAKE) -C $(CURDIR)/cddl/sbin/zpool clean
 	$(PMAKE) -C $(CURDIR)/cddl/sbin/zfs clean

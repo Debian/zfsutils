@@ -1,3 +1,5 @@
+cddl/lib/libzfs_core/libzfs_core.so.*		/lib
+
 cddl/sbin/zpool/zpool				/sbin
 cddl/sbin/zfs/zfs				/sbin
 cddl/usr.bin/zinject/zinject  			/usr/bin

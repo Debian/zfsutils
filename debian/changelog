@@ -1,11 +1,20 @@
-zfsutils (9.1-3) UNRELEASED; urgency=low
+zfsutils (9.2-1) UNRELEASED; urgency=low
 
+  * New upstream release.
+    - Refresh all patches.
+    - Update library dependencies.
+    - Add new library: libzfs_core.
+    - New patches (zfs_needs_libjail.diff, assfail_protection.diff) pending
+      merge in upstream.
+    - Add libjail-dev to B-D.
+
+  [ Robert Millan ]
   * Build with -Werror=implicit-function-declaration.
     - Requires freebsd-glue >= 0.1.1.
     - fix_implicit_warnx_declaration.diff: Cherry-pick from HEAD.
     - 03_glibc_namespace.diff: Extend solaris_hasmntopt kludge.
 
- -- Robert Millan <rmh@debian.org>  Sun, 04 Aug 2013 18:28:11 +0200
+ -- Robert Millan <rmh@debian.org>  Thu, 03 Oct 2013 01:49:26 +0200
 
 zfsutils (9.1-2) unstable; urgency=low
 

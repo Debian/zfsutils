@@ -1,24 +1,18 @@
 --- a/cddl/lib/libzfs/Makefile
 +++ b/cddl/lib/libzfs/Makefile
-@@ -7,12 +7,13 @@
- 
+@@ -8,7 +8,7 @@
  LIB=	zfs
- DPADD=	${LIBMD} ${LIBPTHREAD} ${LIBUMEM} ${LIBUTIL}
--LDADD=	-lmd -lpthread -lumem -lnvpair -luutil -lgeom -lm -lbsd
-+LDADD=	-lpthread -lumem -lnvpair -luutil -lgeom -lm -lbsd
+ DPADD=	${LIBMD} ${LIBPTHREAD} ${LIBUMEM} ${LIBUTIL} ${LIBM} ${LIBNVPAIR} \
+ 	${LIBZFS_CORE}
+-LDADD=	-lmd -lpthread -lumem -lzfs_core
++LDADD=	${.CURDIR}/../../../lib/libmd/libmd.a -lpthread -lumem -lzfs_core
  
- LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
- LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
- LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
- LDADD+= ${.CURDIR}/../../../cddl/lib/libavl/libavl.a
-+LDADD+= ${.CURDIR}/../../../lib/libmd/libmd.a
- 
- SRCS=	deviceid.c \
- 	fsshare.c \
-@@ -58,5 +59,6 @@
- CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libnvpair
+ LDADD+= -lbsd -lm
+ LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
+@@ -61,5 +61,6 @@
  CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libuutil/common
  CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libzfs/common
+ CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libzfs_core/common
 +CFLAGS+= -I${.CURDIR}/../../../lib/libmd
  
  .include <bsd.lib.mk>
