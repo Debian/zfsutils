@@ -1,4 +1,4 @@
-zfsutils (9.2-1) UNRELEASED; urgency=low
+zfsutils (9.2-1) unstable; urgency=low
 
   * New upstream release.
     - Refresh all patches.
