@@ -10,7 +10,6 @@ assfail_protection.diff
 zfs_needs_libjail.diff
 
 # Other patches that might or might not be mergeable
-01_glibc_kludge.diff
 02_glibc_misc.diff
 03_glibc_namespace.diff
 06_mountd.diff

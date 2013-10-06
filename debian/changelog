@@ -13,6 +13,7 @@ zfsutils (9.2-1) UNRELEASED; urgency=low
     - Requires freebsd-glue >= 0.1.1.
     - fix_implicit_warnx_declaration.diff: Cherry-pick from HEAD.
     - 03_glibc_namespace.diff: Extend solaris_hasmntopt kludge.
+  * Remove some unneeded compatibility cruft.
 
  -- Robert Millan <rmh@debian.org>  Thu, 03 Oct 2013 01:49:26 +0200
 

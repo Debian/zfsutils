@@ -1,36 +1,5 @@
----
- sys/cddl/compat/opensolaris/rpc/xdr.h |   26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
-
 --- a/sys/cddl/compat/opensolaris/rpc/xdr.h
 +++ b/sys/cddl/compat/opensolaris/rpc/xdr.h
-@@ -34,6 +34,26 @@
- 
- #ifndef _KERNEL
- 
-+/* Copied from the FreeBSD version of <rpc/xdr.h> */
-+#ifdef __GLIBC__
-+/*
-+ * These are XDR control operators
-+ */
-+
-+#define        XDR_GET_BYTES_AVAIL     1
-+#define        XDR_PEEK                2
-+#define        XDR_SKIPBYTES           3
-+
-+struct xdr_bytesrec {
-+	bool_t xc_is_last_record;
-+	size_t xc_num_avail;
-+};
-+
-+typedef struct xdr_bytesrec xdr_bytesrec;
-+
-+#define xdr_control(xdrs, req, op)	XDR_CONTROL(xdrs, req, op)
-+#endif
-+
- #include <assert.h>
- 
- /*
 @@ -60,10 +80,16 @@
  }
  
