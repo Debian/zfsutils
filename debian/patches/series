@@ -1,9 +1,9 @@
 # Patches from (or merged in) upstream
 12_freebsd.diff
 fix_implicit_warnx_declaration.diff
+zfs_needs_libjail.diff
 
 # Mergeable material
-zfs_needs_libjail.diff
 disable_libjail.diff
 gratuitous_dependencies.diff
 #manpage_hyphens.diff
