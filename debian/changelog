@@ -1,3 +1,10 @@
+zfsutils (9.2-2) unstable; urgency=low
+
+  * Disable dependency on libjail (by means of MK_JAIL knob, see
+    disable_libjail.diff).  (Closes: #725643)
+
+ -- Robert Millan <rmh@debian.org>  Mon, 07 Oct 2013 14:49:03 +0200
+
 zfsutils (9.2-1) unstable; urgency=low
 
   * New upstream release.

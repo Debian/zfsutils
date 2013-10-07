@@ -3,11 +3,12 @@
 fix_implicit_warnx_declaration.diff
 
 # Mergeable material
+zfs_needs_libjail.diff
+disable_libjail.diff
 gratuitous_dependencies.diff
 #manpage_hyphens.diff
 include_next.diff
 assfail_protection.diff
-zfs_needs_libjail.diff
 
 # Other patches that might or might not be mergeable
 02_glibc_misc.diff

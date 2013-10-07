@@ -1,6 +1,6 @@
 --- a/sys/cddl/compat/opensolaris/rpc/xdr.h
 +++ b/sys/cddl/compat/opensolaris/rpc/xdr.h
-@@ -60,10 +80,16 @@
+@@ -60,10 +60,16 @@
  }
  
  #undef XDR_CONTROL

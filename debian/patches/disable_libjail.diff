@@ -1,0 +1,101 @@
+--- a/cddl/sbin/zfs/Makefile
++++ b/cddl/sbin/zfs/Makefile
+@@ -1,5 +1,7 @@
+ # $FreeBSD$
+ 
++.include <bsd.own.mk>
++
+ .PATH: ${.CURDIR}/../../../cddl/contrib/opensolaris/cmd/zfs
+ 
+ PROG=	zfs
+@@ -22,8 +24,14 @@
+ CFLAGS+= -I${.CURDIR}/../../../sys/cddl/contrib/opensolaris/uts/common/sys
+ CFLAGS+= -I${.CURDIR}/../../../sys/cddl/contrib/opensolaris/common/zfs
+ 
+-DPADD=	${LIBGEOM} ${LIBJAIL} ${LIBNVPAIR} ${LIBUMEM} \
++DPADD=	${LIBGEOM} ${LIBNVPAIR} ${LIBUMEM} \
+ 	${LIBUTIL} ${LIBUUTIL} ${LIBZFS_CORE} ${LIBZFS}
+-LDADD=	-lgeom -ljail -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
++LDADD=	-lgeom -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
++
++.if ${MK_JAIL} != "no"
++CFLAGS+= -DJAIL
++DPADD+= ${LIBJAIL}
++LDADD+= -ljail
++.endif
+ 
+ .include <bsd.prog.mk>
+--- a/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
++++ b/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
+@@ -58,7 +58,9 @@
+ #include <sys/types.h>
+ #include <time.h>
+ #include <err.h>
++#ifdef JAIL
+ #include <jail.h>
++#endif
+ 
+ #include <libzfs.h>
+ #include <libzfs_core.h>
+@@ -105,8 +107,10 @@
+ static int zfs_do_holds(int argc, char **argv);
+ static int zfs_do_release(int argc, char **argv);
+ static int zfs_do_diff(int argc, char **argv);
++#ifdef JAIL
+ static int zfs_do_jail(int argc, char **argv);
+ static int zfs_do_unjail(int argc, char **argv);
++#endif
+ 
+ /*
+  * Enable a reasonable set of defaults for libumem debugging on DEBUG builds.
+@@ -133,8 +137,10 @@
+ 	HELP_GET,
+ 	HELP_INHERIT,
+ 	HELP_UPGRADE,
++#ifdef JAIL
+ 	HELP_JAIL,
+ 	HELP_UNJAIL,
++#endif
+ 	HELP_LIST,
+ 	HELP_MOUNT,
+ 	HELP_PROMOTE,
+@@ -208,8 +214,10 @@
+ 	{ "release",	zfs_do_release,		HELP_RELEASE		},
+ 	{ "diff",	zfs_do_diff,		HELP_DIFF		},
+ 	{ NULL },
++#ifdef JAIL
+ 	{ "jail",	zfs_do_jail,		HELP_JAIL		},
+ 	{ "unjail",	zfs_do_unjail,		HELP_UNJAIL		},
++#endif
+ };
+ 
+ #define	NCOMMAND	(sizeof (command_table) / sizeof (command_table[0]))
+@@ -244,10 +252,12 @@
+ 	case HELP_UPGRADE:
+ 		return (gettext("\tupgrade [-v]\n"
+ 		    "\tupgrade [-r] [-V version] <-a | filesystem ...>\n"));
++#ifdef JAIL
+ 	case HELP_JAIL:
+ 		return (gettext("\tjail <jailid|jailname> <filesystem>\n"));
+ 	case HELP_UNJAIL:
+ 		return (gettext("\tunjail <jailid|jailname> <filesystem>\n"));
++#endif
+ 	case HELP_LIST:
+ 		return (gettext("\tlist [-rH][-d max] "
+ 		    "[-o property[,...]] [-t type[,...]] [-s property] ...\n"
+@@ -6358,6 +6368,7 @@
+ 	return (unshare_unmount(OP_SHARE, argc, argv));
+ }
+ 
++#ifdef JAIL
+ /*
+  * Attach/detach the given dataset to/from the given jail
+  */
+@@ -6419,6 +6430,7 @@
+ 
+ 	return (do_jail(argc, argv, 0));
+ }
++#endif /* JAIL */
+ 
+ /*
+  * Called when invoked as /etc/fs/zfs/mount.  Do the mount if the mountpoint is

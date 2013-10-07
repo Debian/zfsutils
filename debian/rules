@@ -135,7 +135,7 @@ build-zfsutils-stamp: build-libzfs \
 		build-libzfs_core \
 		build-libnvpair-stamp build-libuutil-stamp build-libumem build-libzpool
 	$(PMAKE) -C $(CURDIR)/cddl/sbin/zpool
-	$(PMAKE) -C $(CURDIR)/cddl/sbin/zfs
+	$(PMAKE) -C $(CURDIR)/cddl/sbin/zfs -DWITHOUT_JAIL
 
 	$(PMAKE) -C $(CURDIR)/cddl/usr.sbin/zdb
 	$(PMAKE) -C $(CURDIR)/cddl/usr.bin/zinject

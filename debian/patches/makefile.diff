@@ -41,21 +41,21 @@
  NO_PROFILE=
 --- a/cddl/sbin/zfs/Makefile
 +++ b/cddl/sbin/zfs/Makefile
-@@ -24,6 +24,13 @@
+@@ -26,7 +26,13 @@
  
- DPADD=	${LIBGEOM} ${LIBJAIL} ${LIBNVPAIR} ${LIBUMEM} \
+ DPADD=	${LIBGEOM} ${LIBNVPAIR} ${LIBUMEM} \
  	${LIBUTIL} ${LIBUUTIL} ${LIBZFS_CORE} ${LIBZFS}
--LDADD=	-lgeom -ljail -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
-+LDADD=	-lgeom -ljail -lnvpair -lumem -luutil -lzfs_core -lzfs
+-LDADD=	-lgeom -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
++LDADD=	-lgeom -lnvpair -lumem -lbsd  -luutil -lzfs_core -lzfs
 +
-+LDADD+=	-lbsd
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
  
- .include <bsd.prog.mk>
+ .if ${MK_JAIL} != "no"
+ CFLAGS+= -DJAIL
 --- a/cddl/sbin/zpool/Makefile
 +++ b/cddl/sbin/zpool/Makefile
 @@ -28,6 +28,14 @@
