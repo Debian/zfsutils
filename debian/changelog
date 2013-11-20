@@ -1,4 +1,4 @@
-zfsutils (9.2-3) UNRELEASED; urgency=low
+zfsutils (9.2-3) unstable; urgency=high
 
   * Lump cddl/compat/opensolaris patches together into a single patch.
   * Add libzfs_core to zfsutils-udeb.
