@@ -1,9 +1,9 @@
-zfsutils (9.2-4) UNRELEASED; urgency=low
+zfsutils (9.2-4) unstable; urgency=critical
 
   * Make 14_bootloader_advice.diff more pallatable to upstream.
-  * Bump GRUB requirement to 2.00-21 for ZFS v5000 support.
+  * Bump GRUB requirement to 2.00-21 for ZFS v5000 support. (Closes: #730143)
 
- -- Robert Millan <rmh@debian.org>  Thu, 21 Nov 2013 15:12:14 +0100
+ -- Robert Millan <rmh@debian.org>  Thu, 21 Nov 2013 23:22:43 +0100
 
 zfsutils (9.2-3) unstable; urgency=high
 
