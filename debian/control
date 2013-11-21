@@ -87,9 +87,9 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  libzfs1 (= ${binary:Version}), libumem1 (= ${binary:Version}), libzpool1 (= ${binary:Version})
 Recommends: cron
 Breaks:
-# Require GRUB with ZFS v28 support to ensure "zpool upgrade" doesn't render
+# Require GRUB with ZFS v5000 support to ensure "zpool upgrade" doesn't render
 # system unbootable.
- grub-common (<< 1.99~20101210-1~),
+ grub-common (<< 2.00-21~),
 # Pre-28 versions are ABI-incompatible
  kfreebsd-image-8.1-1-amd64,
  kfreebsd-image-8.1-1-486,
