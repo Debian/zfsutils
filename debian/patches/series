@@ -9,11 +9,11 @@ disable_libjail.diff
 gratuitous_dependencies.diff
 #manpage_hyphens.diff
 assfail_protection.diff
+14_bootloader_advice.diff
 
 # Other patches that might or might not be mergeable
 ulong_t.diff
 solaris_rlim64_t.diff
-14_bootloader_advice.diff
 15_pthread_compat.diff
 
 # Patches that are likely to be Debian-specific
