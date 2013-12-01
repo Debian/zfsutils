@@ -11,45 +11,56 @@
  CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libuutil/common
 --- a/cddl/lib/libzfs/Makefile
 +++ b/cddl/lib/libzfs/Makefile
-@@ -8,7 +8,11 @@
+@@ -8,7 +8,13 @@
  LIB=	zfs
  DPADD=	${LIBMD} ${LIBPTHREAD} ${LIBUMEM} ${LIBUTIL} ${LIBM} ${LIBNVPAIR} \
  	${LIBZFS_CORE}
 -LDADD=	-lmd -lpthread -lumem -lutil -lzfs_core
-+LDADD=	-lmd -lpthread -lumem -lzfs_core
++LDADD=	${.CURDIR}/../../../lib/libmd/libmd.a -lpthread -lumem -lzfs_core
 +
-+LDADD+= -lbsd -lm
++LDADD+= -lbsd -lm -luutil -lnvpair -lgeom
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
  
  SRCS=	deviceid.c \
  	fsshare.c \
+@@ -57,5 +63,6 @@
+ CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libuutil/common
+ CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libzfs/common
+ CFLAGS+= -I${.CURDIR}/../../../cddl/contrib/opensolaris/lib/libzfs_core/common
++CFLAGS+= -I${.CURDIR}/../../../lib/libmd
+ 
+ .include <bsd.lib.mk>
 --- a/cddl/lib/libzpool/Makefile
 +++ b/cddl/lib/libzpool/Makefile
-@@ -57,7 +57,11 @@
+@@ -57,7 +57,14 @@
  CFLAGS+=	-I${.CURDIR}/../../../lib/libthr/arch/${MACHINE_CPUARCH}/include
  
  DPADD=		${LIBMD} ${LIBPTHREAD} ${LIBZ}
 -LDADD=		-lmd -lpthread -lz -lumem -lnvpair -lavl
-+LDADD=		-lmd -lpthread -lz -lumem -lnvpair -lbsd -lrt
++LDADD=		     -lpthread -lz -lumem -lnvpair -lavl-illumos -lbsd -lrt
 +
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
-+LDADD+= ${.CURDIR}/../../../cddl/lib/libavl/libavl.a
++LDADD+= -L${.CURDIR}/../../../cddl/lib/libavl
++
++CFLAGS+= -I${.CURDIR}/../../../lib/libmd
++LDADD+= ${.CURDIR}/../../../lib/libmd/libmd.a
  
  # atomic.S doesn't like profiling.
  NO_PROFILE=
 --- a/cddl/sbin/zfs/Makefile
 +++ b/cddl/sbin/zfs/Makefile
-@@ -26,7 +26,13 @@
+@@ -26,7 +26,12 @@
  
  DPADD=	${LIBGEOM} ${LIBNVPAIR} ${LIBUMEM} \
  	${LIBUTIL} ${LIBUUTIL} ${LIBZFS_CORE} ${LIBZFS}
 -LDADD=	-lgeom -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
-+LDADD=	-lgeom -lnvpair -lumem -lbsd  -luutil -lzfs_core -lzfs
++LDADD=	-lgeom -lnvpair -lbsd  -luutil -lzfs_core -lzfs
 +
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
-+LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
@@ -58,20 +69,18 @@
  CFLAGS+= -DJAIL
 --- a/cddl/sbin/zpool/Makefile
 +++ b/cddl/sbin/zpool/Makefile
-@@ -28,6 +28,14 @@
+@@ -28,6 +28,12 @@
  
  DPADD=	${LIBAVL} ${LIBGEOM} ${LIBNVPAIR} \
  	${LIBUMEM} ${LIBUTIL} ${LIBUUTIL} ${LIBZFS_CORE} ${LIBZFS}
 -LDADD=	-lavl -lgeom -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
-+LDADD=	-lgeom -lnvpair -lumem -lutil -luutil -lzfs_core -lzfs
++LDADD=	-lgeom -lnvpair -luutil -lzfs_core -lzfs
 +
 +LDADD+=	-lbsd
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
-+LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
-+LDADD+= ${.CURDIR}/../../../cddl/lib/libavl/libavl.a
  
  .include <bsd.prog.mk>
 --- a/cddl/usr.bin/zinject/Makefile
@@ -91,7 +100,7 @@
  .include <bsd.prog.mk>
 --- a/cddl/usr.bin/ztest/Makefile
 +++ b/cddl/usr.bin/ztest/Makefile
-@@ -20,9 +20,18 @@
+@@ -20,9 +20,17 @@
  
  DPADD=	${LIBGEOM} ${LIBM} ${LIBNVPAIR} ${LIBUMEM} ${LIBZPOOL} \
  	${LIBPTHREAD} ${LIBAVL} ${LIBZFS_CORE} ${LIBZFS} ${LIBUUTIL}
@@ -106,7 +115,6 @@
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzpool
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
-+LDADD+= ${.CURDIR}/../../../cddl/lib/libavl/libavl.a
 +
  CSTD=	c99
  
@@ -130,12 +138,24 @@
  
 --- a/cddl/lib/libzfs_core/Makefile
 +++ b/cddl/lib/libzfs_core/Makefile
-@@ -10,6 +10,8 @@
+@@ -10,6 +10,9 @@
  DPADD=	${LIBNVPAIR}
  LDADD=	-lnvpair
  
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
++LDADD+= -lbsd
 +
  SRCS=	libzfs_core.c \
  	libzfs_core_compat.c
  
+--- a/cddl/lib/libavl/Makefile
++++ b/cddl/lib/libavl/Makefile
+@@ -2,7 +2,7 @@
+ 
+ .PATH: ${.CURDIR}/../../../sys/cddl/contrib/opensolaris/common/avl
+ 
+-LIB=	avl
++LIB=	avl-illumos
+ SRCS=	avl.c
+ WARNS?=	0
+ CFLAGS+= -I${.CURDIR}/../../../sys/cddl/compat/opensolaris

@@ -111,7 +111,11 @@ build-libzpool-stamp: build-libavl build-libnvpair-stamp build-libumem build-lib
 	touch $@
 
 build-libzfs: build-libzfs-stamp
-build-libzfs-stamp: build-libumem build-libzfs_core
+build-libzfs-stamp: \
+		build-libnvpair \
+		build-libumem \
+		build-libuutil \
+		build-libzfs_core
 	$(PMAKE) -C $(CURDIR)/cddl/lib/libzfs
 	touch $@
 

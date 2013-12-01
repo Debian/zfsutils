@@ -1,4 +1,5 @@
 cddl/lib/libzfs_core/libzfs_core.so.*		/lib
+cddl/lib/libavl/libavl-illumos.so.*		/lib
 
 cddl/sbin/zpool/zpool	/sbin
 cddl/sbin/zfs/zfs	/sbin

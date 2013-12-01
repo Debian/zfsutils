@@ -1,3 +1,10 @@
+zfsutils (9.2-5) UNRELEASED; urgency=low
+
+  * Library dependency cleanup: Remove gratuitous dependencies, add
+    missing dependencies and build libavl as a shared object.
+
+ -- Robert Millan <rmh@debian.org>  Sun, 01 Dec 2013 14:03:01 +0100
+
 zfsutils (9.2-4) unstable; urgency=critical
 
   * Make 14_bootloader_advice.diff more pallatable to upstream.

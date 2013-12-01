@@ -17,7 +17,6 @@ solaris_rlim64_t.diff
 15_pthread_compat.diff
 
 # Patches that are likely to be Debian-specific
-makefile.diff
 #manpage_debian_specifics.diff
-libmd_static.diff
 fix_realpath_abuse.diff
+makefile.diff
