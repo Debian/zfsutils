@@ -3,6 +3,7 @@ zfsutils (9.2-5) UNRELEASED; urgency=low
   * Library dependency cleanup: Remove gratuitous dependencies, add
     missing dependencies and build libavl as a shared object.
   * Fetch source code securely (https) in get-orig-source.
+  * Correctly setup BSD version of MAKEFLAGS to support parallel builds.
 
  -- Robert Millan <rmh@debian.org>  Sun, 01 Dec 2013 14:03:01 +0100
 
