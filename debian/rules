@@ -85,7 +85,7 @@ get-orig-source:
 	         cddl/usr.bin/ztest \
 	         cddl/usr.sbin/zdb \
 	         ; do \
-	    svn export $(SVN)/$$i $(ORIGDIR)/$$i ; \
+	    svn export -r $(svn_revision) $(SVN)/$$i $(ORIGDIR)/$$i ; \
 	done
 	tar --numeric-owner --owner 0 --group 0 -czf ../$(TARNAME) $(ORIGDIR)
 	rm -rf $(ORIGDIR)
