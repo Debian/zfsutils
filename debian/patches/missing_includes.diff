@@ -1,0 +1,13 @@
+cddl/compat/opensolaris/misc/thread_pool.c
+ - missing <string.h> for bzero()
+
+--- a/cddl/compat/opensolaris/misc/thread_pool.c
++++ b/cddl/compat/opensolaris/misc/thread_pool.c
+@@ -31,6 +31,7 @@
+ 
+ #include <stdlib.h>
+ #include <signal.h>
++#include <string.h>
+ #include <errno.h>
+ #include "thread_pool_impl.h"
+ 

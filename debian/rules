@@ -35,9 +35,9 @@ version		:= $(shell echo $(full_version) | sed -e 's/[~+-].*//g')
 major           := $(shell echo $(version) | sed -e 's/\..*//g')
 revision	:= $(shell echo $(full_version) | sed -e 's/^[^+-]*//g')
 
-SVN		:= https://svn0.us-west.freebsd.org/base/release/$(version).0
+#SVN		:= https://svn0.us-west.freebsd.org/base/release/$(version).0
 #SVN		:= https://svn0.us-west.freebsd.org/base/releng/$(version)
-#SVN		:= https://svn0.us-west.freebsd.org/base/stable/$(major)
+SVN		:= https://svn0.us-west.freebsd.org/base/stable/$(major)
 #SVN		:= https://svn0.us-west.freebsd.org/base/head
 
 SOURCE = zfsutils
@@ -50,7 +50,7 @@ PMAKE = \
 	MAKEFLAGS=$(BSD_MAKEFLAGS) \
 	COPTS="$(CFLAGS)" CFLAGS="$(CFLAGS)" NO_WERROR=1 NOGCCERROR=1 \
         NOSHARED=NO NO_SHARED=NO DESTDIR=$(DESTDIR) make
-export SHLIB_MAJOR = 1
+export SHLIB_MAJOR = 2
 export SHLIBDIR = ./
 
 get-orig-source:
@@ -121,6 +121,7 @@ build-libzpool-stamp: build-libavl build-libnvpair-stamp build-libumem build-lib
 
 build-libzfs: build-libzfs-stamp
 build-libzfs-stamp: \
+		build-libavl \
 		build-libnvpair \
 		build-libumem \
 		build-libuutil \

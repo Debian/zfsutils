@@ -1,6 +1,6 @@
 --- a/cddl/contrib/opensolaris/lib/libzpool/common/kernel.c
 +++ b/cddl/contrib/opensolaris/lib/libzpool/common/kernel.c
-@@ -467,7 +467,7 @@
+@@ -521,7 +521,7 @@
  /*ARGSUSED*/
  int
  vn_rdwr(int uio, vnode_t *vp, void *addr, ssize_t len, offset_t offset,
@@ -11,7 +11,7 @@
  
 --- a/cddl/contrib/opensolaris/lib/libzpool/common/sys/zfs_context.h
 +++ b/cddl/contrib/opensolaris/lib/libzpool/common/sys/zfs_context.h
-@@ -113,8 +113,8 @@
+@@ -117,8 +117,8 @@
  
  #define	ZFS_LOG(...)	do {  } while (0)
  
@@ -22,7 +22,7 @@
  
  #ifdef ZFS_DEBUG
  extern void dprintf_setup(int *argc, char **argv);
-@@ -498,7 +498,7 @@
+@@ -513,7 +513,7 @@
  extern int vn_openat(char *path, int x1, int oflags, int mode, vnode_t **vpp,
      int x2, int x3, vnode_t *vp, int fd);
  extern int vn_rdwr(int uio, vnode_t *vp, void *addr, ssize_t len,
@@ -33,7 +33,7 @@
  #define	vn_remove(path, x1, x2)		remove(path)
 --- a/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_vnops.c
 +++ b/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/zfs_vnops.c
-@@ -794,7 +794,7 @@
+@@ -798,7 +798,7 @@
  zfs_write(vnode_t *vp, uio_t *uio, int ioflag, cred_t *cr, caller_context_t *ct)
  {
  	znode_t		*zp = VTOZ(vp);

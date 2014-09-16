@@ -3,7 +3,7 @@ See PR misc/162519
 
 --- a/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_import.c
 +++ b/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_import.c
-@@ -1158,7 +1158,7 @@
+@@ -1169,7 +1169,7 @@
  		int dfd;
  
  		/* use realpath to normalize the path */

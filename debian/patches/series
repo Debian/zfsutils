@@ -1,7 +1,4 @@
 # Patches from (or merged in) upstream
-12_freebsd.diff
-fix_implicit_warnx_declaration.diff
-zfs_needs_libjail.diff
 
 # Mergeable material
 compat_opensolaris.diff
@@ -20,3 +17,5 @@ solaris_rlim64_t.diff
 #manpage_debian_specifics.diff
 fix_realpath_abuse.diff
 makefile.diff
+missing_includes.diff
+match_glibc_idtype.diff

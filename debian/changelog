@@ -1,11 +1,31 @@
-zfsutils (9.2-5) UNRELEASED; urgency=low
+zfsutils (10.1~pre1) UNRELEASED; urgency=low
 
+  [ Robert Millan ]
   * Library dependency cleanup: Remove gratuitous dependencies, add
     missing dependencies and build libavl as a shared object.
   * Fetch source code securely (https) in get-orig-source.
   * Correctly setup BSD version of MAKEFLAGS to support parallel builds.
 
- -- Robert Millan <rmh@debian.org>  Sun, 01 Dec 2013 14:03:01 +0100
+  [ Steven Chamberlain ]
+  * New upstream snapshot of 10.1-PRERELEASE
+    - bump libraries' SONAME to 2
+  * Drop patches applied upstream:
+    - new upstream has 12_freebsd.diff merged
+    - fix_implicit_warnx_declaration.diff
+    - zfs_needs_libjail.diff
+  * Refresh patches:
+    - compat_opensolaris.diff
+    - gratuitous_dependencies.diff
+    - 14_bootloader_advice.diff
+    - solaris_rlim64_t.diff
+    - 15_pthread_compat.diff
+    - fix_realpath_abuse.diff
+    - makefile.diff
+  * Build fixes:
+    - missing_includes.diff
+    - match_glibc_idtype.diff
+
+ -- GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>  Tue, 16 Sep 2014 10:56:18 +0100
 
 zfsutils (9.2-4) unstable; urgency=critical
 

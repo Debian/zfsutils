@@ -1,0 +1,13 @@
+Use the same include guard as glibc, to not define idtype_t twice
+
+--- a/sys/cddl/contrib/opensolaris/uts/common/sys/procset.h
++++ b/sys/cddl/contrib/opensolaris/uts/common/sys/procset.h
+@@ -51,6 +51,8 @@
+ #define	P_INITUID	0
+ #define	P_INITPGID	0
+ 
++#define _IDTYPE_T_DECLARED __ENUM_IDTYPE_T
++
+ #ifndef _IDTYPE_T_DECLARED
+ 
+ /*
