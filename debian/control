@@ -15,14 +15,14 @@ Vcs-Browser: http://anonscm.debian.org/viewvc/glibc-bsd/trunk/zfsutils/
 Vcs-Svn: svn://anonscm.debian.org/glibc-bsd/trunk/zfsutils/
 Standards-Version: 3.9.3
 
-Package: libuutil1
+Package: libuutil2
 Section: libs
 Architecture: kfreebsd-any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: illumos userland utility library
  This package contains the illumos userland utility library.
 
-Package: libuutil1-udeb
+Package: libuutil2-udeb
 Package-Type: udeb
 Section: debian-installer
 Architecture: kfreebsd-any
@@ -32,7 +32,7 @@ Description: illumos userland utility library (debian-installer version)
  .
  This is a minimal package for use in debian-installer.
 
-Package: libnvpair1
+Package: libnvpair2
 Section: libs
 Architecture: kfreebsd-any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -40,7 +40,7 @@ Description: illumos name-value pair library
  This package contains the illumos libnvpair library, for managing
  name-value pairs.
 
-Package: libnvpair1-udeb
+Package: libnvpair2-udeb
 Package-Type: udeb
 Section: debian-installer
 Architecture: kfreebsd-any
@@ -51,7 +51,7 @@ Description: illumos name-value pair library (debian-installer version)
  .
  This is a minimal package for use in debian-installer.
 
-Package: libzfs1
+Package: libzfs2
 Section: libs
 Architecture: kfreebsd-any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -61,7 +61,7 @@ Description: illumos ZFS library
  .
  The ZFS library provides support for managing ZFS filesystems.
 
-Package: libzfs1-udeb
+Package: libzfs2-udeb
 Package-Type: udeb
 Section: debian-installer
 Architecture: kfreebsd-any
@@ -83,8 +83,8 @@ Architecture: kfreebsd-any
 # dpkg-shlibdeps can't help us here, because it only can create unversioned
 # dependencies.
 Depends: ${shlibs:Depends}, ${misc:Depends},
- libuutil1 (= ${binary:Version}), libnvpair1 (= ${binary:Version}),
- libzfs1 (= ${binary:Version}), libumem1 (= ${binary:Version}), libzpool1 (= ${binary:Version})
+ libuutil2 (= ${binary:Version}), libnvpair2 (= ${binary:Version}),
+ libzfs2 (= ${binary:Version}), libumem2 (= ${binary:Version}), libzpool2 (= ${binary:Version})
 Recommends: cron
 Breaks:
 # Require GRUB with ZFS v5000 support to ensure "zpool upgrade" doesn't render
@@ -113,8 +113,8 @@ Package-Type: udeb
 Section: debian-installer
 Architecture: kfreebsd-any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- libuutil1-udeb (= ${binary:Version}), libnvpair1-udeb (= ${binary:Version}),
- libzfs1-udeb (= ${binary:Version}), libumem1-udeb (= ${binary:Version}), libzpool1-udeb (= ${binary:Version}),
+ libuutil2-udeb (= ${binary:Version}), libnvpair2-udeb (= ${binary:Version}),
+ libzfs2-udeb (= ${binary:Version}), libumem2-udeb (= ${binary:Version}), libzpool2-udeb (= ${binary:Version}),
  zfs-modules,
 Description: command-line tools to manage ZFS filesystems (debian-installer version)
  The Z file system is a pooled filesystem designed for maximum data integrity,
@@ -126,7 +126,7 @@ Description: command-line tools to manage ZFS filesystems (debian-installer vers
  This is a minimal package for use in debian-installer.
 
 
-Package: libumem1
+Package: libumem2
 Section: libs
 Architecture: kfreebsd-any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -134,7 +134,7 @@ Description: illumos memory-management library
  This package contains the illumos libumem library, to detect
  memory management bugs in applications
 
-Package: libumem1-udeb
+Package: libumem2-udeb
 Package-Type: udeb
 Section: debian-installer
 Architecture: kfreebsd-any
@@ -145,14 +145,14 @@ Description: illumos memory-management library (debian-installer version)
  .
  This is a minimal package for use in debian-installer.
 
-Package: libzpool1
+Package: libzpool2
 Section: libs
 Architecture: kfreebsd-any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: illumos interface library to manage ZFS storage pools
  This package contains the illumos libzpool library.
 
-Package: libzpool1-udeb
+Package: libzpool2-udeb
 Package-Type: udeb
 Section: debian-installer
 Architecture: kfreebsd-any
