@@ -24,6 +24,8 @@ zfsutils (10.1~svn271683-1) UNRELEASED; urgency=low
   * Build fixes:
     - missing_includes.diff
     - match_glibc_idtype.diff
+  * Depend on systemtap-sdt-dev;  it provides an adequate sys/sdt.h
+    to build the package although DTrace or SystemTap are unused yet
 
  -- GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>  Tue, 16 Sep 2014 10:56:18 +0100
 

@@ -11,6 +11,7 @@ Build-Depends: debhelper (>= 7.0.50~),
  libgeom-dev,
  zlib1g-dev,
  freebsd-glue (>= 0.1.8~),
+ systemtap-sdt-dev
 Vcs-Browser: http://anonscm.debian.org/viewvc/glibc-bsd/trunk/zfsutils/
 Vcs-Svn: svn://anonscm.debian.org/glibc-bsd/trunk/zfsutils/
 Standards-Version: 3.9.3
