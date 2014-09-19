@@ -27,7 +27,7 @@ zfsutils (10.1~svn271683-1) experimental; urgency=low
   * Depend on systemtap-sdt-dev;  it provides an adequate sys/sdt.h
     to build the package although DTrace or SystemTap are unused yet
 
- -- GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>  Tue, 16 Sep 2014 10:56:18 +0100
+ -- Christoph Egger <christoph@debian.org>  Wed, 17 Sep 2014 09:50:04 -0700
 
 zfsutils (9.2-4) unstable; urgency=critical
 
