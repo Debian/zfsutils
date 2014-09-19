@@ -1,3 +1,11 @@
+zfsutils (10.1~svn271683-3) UNRELEASED; urgency=medium
+
+  [ Steven Chamberlain ]
+  * bug762199.patch: st_size is only meaningful for regular files;
+    existing code did not detect any zpools for import (Closes: #762199)
+
+ -- GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>  Fri, 19 Sep 2014 15:21:25 +0100
+
 zfsutils (10.1~svn271683-1) experimental; urgency=low
 
   [ Robert Millan ]

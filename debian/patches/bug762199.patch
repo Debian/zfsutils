@@ -1,0 +1,34 @@
+From: Steven Chamberlain <steven@pyro.eu.org>
+Subject: st_size is only meaningful for regular files
+Bug-Debian: http://bugs.debian.org/762199
+Forwarded: no
+
+--- a/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_import.c
++++ b/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_import.c
+@@ -1063,23 +1063,19 @@
+ 		return;
+ 	}
+ 	/* this file is too small to hold a zpool */
+-#ifdef sun
+ 	if (S_ISREG(statbuf.st_mode) &&
+ 	    statbuf.st_size < SPA_MINDEVSIZE) {
+ 		(void) close(fd);
+ 		return;
+-	} else if (!S_ISREG(statbuf.st_mode)) {
++	}
++#ifdef sun
++	if (!S_ISREG(statbuf.st_mode)) {
+ 		/*
+ 		 * Try to read the disk label first so we don't have to
+ 		 * open a bunch of minor nodes that can't have a zpool.
+ 		 */
+ 		check_slices(rn->rn_avl, fd, rn->rn_name);
+ 	}
+-#else	/* !sun */
+-	if (statbuf.st_size < SPA_MINDEVSIZE) {
+-		(void) close(fd);
+-		return;
+-	}
+ #endif	/* sun */
+ 
+ 	if ((zpool_read_label(fd, &config)) != 0) {

@@ -19,3 +19,4 @@ fix_realpath_abuse.diff
 makefile.diff
 missing_includes.diff
 match_glibc_idtype.diff
+bug762199.patch
