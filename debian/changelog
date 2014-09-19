@@ -7,6 +7,8 @@ zfsutils (10.1~svn271683-2) UNRELEASED; urgency=medium
     libutil.h;  not needed and caused FTBFS on kfreebsd-i386 only
   * Bump minimum GRUB version to 2.02~beta2-11 for lz4_compress support;
     enabled by default for metadata (but not file contents, yet)
+  * Fix display of RAID-Z devices in "zpool status" (Thanks, Jeff Epler!
+    Closes: #653929)
 
  -- GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>  Fri, 19 Sep 2014 15:21:25 +0100
 

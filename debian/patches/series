@@ -20,3 +20,4 @@ makefile.diff
 missing_includes.diff
 match_glibc_idtype.diff
 bug762199.patch
+bug653929.diff
