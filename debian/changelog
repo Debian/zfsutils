@@ -5,6 +5,8 @@ zfsutils (10.1~svn271683-2) UNRELEASED; urgency=medium
     existing code did not detect any zpools for import (Closes: #762199)
   * cddl/compat/opensolaris/misc/fsshare.c: don't include missing/unused
     libutil.h;  not needed and caused FTBFS on kfreebsd-i386 only
+  * Bump minimum GRUB version to 2.02~beta2-11 for lz4_compress support;
+    enabled by default for metadata (but not file contents, yet)
 
  -- GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>  Fri, 19 Sep 2014 15:21:25 +0100
 
