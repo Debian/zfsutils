@@ -133,15 +133,16 @@
  
 --- a/cddl/compat/opensolaris/misc/fsshare.c
 +++ b/cddl/compat/opensolaris/misc/fsshare.c
-@@ -34,7 +34,6 @@
+@@ -33,8 +33,6 @@
+ #include <errno.h>
  #include <fcntl.h>
  #include <fsshare.h>
- #include <libutil.h>
+-#include <libutil.h>
 -#include <pathnames.h>	/* _PATH_MOUNTDPID */
  #include <signal.h>
  #include <stdio.h>
  #include <string.h>
-@@ -47,6 +46,9 @@
+@@ -47,6 +45,9 @@
  static void
  restart_mountd(void)
  {
@@ -151,7 +152,7 @@
  	struct pidfh *pfh;
  	pid_t mountdpid;
  
-@@ -62,6 +64,7 @@
+@@ -62,6 +63,7 @@
  	}
  	/* We have mountd(8) PID in mountdpid varible. */
  	kill(mountdpid, SIGHUP);
@@ -159,7 +160,7 @@
  }
  
  /*
-@@ -69,7 +72,7 @@
+@@ -69,7 +71,7 @@
   * mountpoint specified in the 'skip' argument.
   */
  static char *
@@ -168,7 +169,7 @@
  {
  	static char line[MAXLINESIZE];
  	size_t len, skiplen;
-@@ -200,7 +203,7 @@
+@@ -200,7 +202,7 @@
  
  	/* Place big, fat warning at the begining of the file. */
  	fprintf(newfd, "%s", FILE_HEADER);
