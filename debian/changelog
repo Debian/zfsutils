@@ -1,4 +1,4 @@
-zfsutils (10.1~svn271683-1) UNRELEASED; urgency=low
+zfsutils (10.1~svn271683-1) experimental; urgency=low
 
   [ Robert Millan ]
   * Library dependency cleanup: Remove gratuitous dependencies, add
