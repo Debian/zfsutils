@@ -1,4 +1,4 @@
-zfsutils (10.1~svn271683-2) UNRELEASED; urgency=medium
+zfsutils (10.1~svn271683-2) experimental; urgency=medium
 
   [ Steven Chamberlain ]
   * bug762199.patch: st_size is only meaningful for regular files;
@@ -10,7 +10,7 @@ zfsutils (10.1~svn271683-2) UNRELEASED; urgency=medium
   * Fix display of RAID-Z devices in "zpool status" (Thanks, Jeff Epler!
     Closes: #653929)
 
- -- GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>  Fri, 19 Sep 2014 15:21:25 +0100
+ -- Christoph Egger <christoph@debian.org>  Fri, 19 Sep 2014 15:43:47 -0700
 
 zfsutils (10.1~svn271683-1) experimental; urgency=low
 
