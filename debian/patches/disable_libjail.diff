@@ -1,14 +1,14 @@
 --- a/cddl/sbin/zfs/Makefile
 +++ b/cddl/sbin/zfs/Makefile
 @@ -1,5 +1,7 @@
- # $FreeBSD: stable/10/cddl/sbin/zfs/Makefile 248571 2013-03-21 08:38:03Z mm $
+ # $FreeBSD$
  
 +.include <bsd.own.mk>
 +
  .PATH: ${.CURDIR}/../../../cddl/contrib/opensolaris/cmd/zfs
  
  PROG=	zfs
-@@ -22,8 +24,14 @@
+@@ -22,8 +24,14 @@ CFLAGS+= -I${.CURDIR}/../../../sys/cddl/
  CFLAGS+= -I${.CURDIR}/../../../sys/cddl/contrib/opensolaris/uts/common/sys
  CFLAGS+= -I${.CURDIR}/../../../sys/cddl/contrib/opensolaris/common/zfs
  
@@ -37,7 +37,7 @@
  
  #include <libzfs.h>
  #include <libzfs_core.h>
-@@ -105,8 +107,10 @@
+@@ -105,8 +107,10 @@ static int zfs_do_hold(int argc, char **
  static int zfs_do_holds(int argc, char **argv);
  static int zfs_do_release(int argc, char **argv);
  static int zfs_do_diff(int argc, char **argv);
@@ -48,7 +48,7 @@
  static int zfs_do_bookmark(int argc, char **argv);
  
  /*
-@@ -134,8 +138,10 @@
+@@ -134,8 +138,10 @@ typedef enum {
  	HELP_GET,
  	HELP_INHERIT,
  	HELP_UPGRADE,
@@ -59,7 +59,7 @@
  	HELP_LIST,
  	HELP_MOUNT,
  	HELP_PROMOTE,
-@@ -211,8 +217,10 @@
+@@ -211,8 +217,10 @@ static zfs_command_t command_table[] = {
  	{ "release",	zfs_do_release,		HELP_RELEASE		},
  	{ "diff",	zfs_do_diff,		HELP_DIFF		},
  	{ NULL },
@@ -70,7 +70,7 @@
  };
  
  #define	NCOMMAND	(sizeof (command_table) / sizeof (command_table[0]))
-@@ -248,10 +256,12 @@
+@@ -248,10 +256,12 @@ get_usage(zfs_help_t idx)
  	case HELP_UPGRADE:
  		return (gettext("\tupgrade [-v]\n"
  		    "\tupgrade [-r] [-V version] <-a | filesystem ...>\n"));
@@ -83,7 +83,7 @@
  	case HELP_LIST:
  		return (gettext("\tlist [-Hp] [-r|-d max] [-o property[,...]] "
  		    "[-s property]...\n\t    [-S property]... [-t type[,...]] "
-@@ -6480,6 +6490,7 @@
+@@ -6480,6 +6490,7 @@ zfs_do_unshare(int argc, char **argv)
  	return (unshare_unmount(OP_SHARE, argc, argv));
  }
  
@@ -91,7 +91,7 @@
  /*
   * Attach/detach the given dataset to/from the given jail
   */
-@@ -6541,6 +6552,7 @@
+@@ -6541,6 +6552,7 @@ zfs_do_unjail(int argc, char **argv)
  
  	return (do_jail(argc, argv, 0));
  }

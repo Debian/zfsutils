@@ -1,6 +1,6 @@
 --- a/cddl/contrib/opensolaris/cmd/zpool/zpool_main.c
 +++ b/cddl/contrib/opensolaris/cmd/zpool/zpool_main.c
-@@ -5004,10 +5004,17 @@
+@@ -5009,10 +5009,17 @@ zpool_do_upgrade(int argc, char **argv)
  	if (cb.cb_poolname[0] != '\0') {
  		(void) printf(
  		    "If you boot from pool '%s', don't forget to update boot code.\n"
@@ -20,7 +20,7 @@
  
 --- a/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_pool.c
 +++ b/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_pool.c
-@@ -2718,11 +2718,18 @@
+@@ -2718,11 +2718,18 @@ zpool_vdev_attach(zpool_handle_t *zhp,
  			(void) fprintf(stderr, dgettext(TEXT_DOMAIN, "If "
  			    "you boot from pool '%s', you may need to update\n"
  			    "boot code on newly attached disk '%s'.\n\n"
