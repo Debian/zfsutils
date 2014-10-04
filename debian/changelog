@@ -1,8 +1,8 @@
 zfsutils (10.1~svn272500-1) UNRELEASED; urgency=medium
 
-  *  New upstream snapshot of 10.1 releng
+  * New upstream snapshot of 10.1-RC1
 
- -- Christoph Egger <christoph@debian.org>  Fri, 19 Sep 2014 15:43:47 -0700
+ -- Petr Salinger <Petr.Salinger@seznam.cz>  Sat,  4 Oct 2014 20:40:52 +0200
 
 zfsutils (10.1~svn271683-2) experimental; urgency=medium
 
