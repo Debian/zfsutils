@@ -153,7 +153,8 @@ build-zfsutils-stamp: build-libzfs \
 
 	$(PMAKE) -C $(CURDIR)/cddl/usr.sbin/zdb
 	$(PMAKE) -C $(CURDIR)/cddl/usr.bin/zinject
-	$(PMAKE) -C $(CURDIR)/cddl/usr.bin/ztest/
+	$(PMAKE) -C $(CURDIR)/cddl/usr.bin/ztest/ && \
+	 mv -f $(CURDIR)/cddl/usr.bin/ztest/ztest $(CURDIR)/cddl/usr.bin/ztest/zfstest
 	touch $@
 
 clean:

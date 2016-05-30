@@ -4,6 +4,8 @@ zfsutils (10.1~svn272500+ds1-1) UNRELEASED; urgency=medium
   * svn export with --ignore-keywords and re-pack upstream source
   * Refresh patch debian/patches/disable_libjail.diff
   * Abort on any error during svn export
+  * Rename ztest executable to zfstest, to avoid conflict with zutils
+    (Closes: #825268)
 
  -- Steven Chamberlain <steven@pyro.eu.org>  Mon, 30 May 2016 14:11:59 +0100
 
