@@ -1,7 +1,9 @@
---- a/cddl/sbin/zfs/Makefile
-+++ b/cddl/sbin/zfs/Makefile
+Index: zfsutils/cddl/sbin/zfs/Makefile
+===================================================================
+--- zfsutils.orig/cddl/sbin/zfs/Makefile
++++ zfsutils/cddl/sbin/zfs/Makefile
 @@ -1,5 +1,7 @@
- # $FreeBSD$
+ # $FreeBSD: releng/10.1/cddl/sbin/zfs/Makefile 248571 2013-03-21 08:38:03Z mm $
  
 +.include <bsd.own.mk>
 +
@@ -25,8 +27,10 @@
 +.endif
  
  .include <bsd.prog.mk>
---- a/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
-+++ b/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
+Index: zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
+===================================================================
+--- zfsutils.orig/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
++++ zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
 @@ -58,7 +58,9 @@
  #include <sys/types.h>
  #include <time.h>
