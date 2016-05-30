@@ -1,16 +1,14 @@
-Index: zfsutils/cddl/sbin/zfs/Makefile
-===================================================================
---- zfsutils.orig/cddl/sbin/zfs/Makefile
-+++ zfsutils/cddl/sbin/zfs/Makefile
+--- a/cddl/sbin/zfs/Makefile
++++ b/cddl/sbin/zfs/Makefile
 @@ -1,5 +1,7 @@
- # $FreeBSD: releng/10.1/cddl/sbin/zfs/Makefile 248571 2013-03-21 08:38:03Z mm $
+ # $FreeBSD$
  
 +.include <bsd.own.mk>
 +
  .PATH: ${.CURDIR}/../../../cddl/contrib/opensolaris/cmd/zfs
  
  PROG=	zfs
-@@ -22,8 +24,14 @@ CFLAGS+= -I${.CURDIR}/../../../sys/cddl/
+@@ -22,8 +24,14 @@
  CFLAGS+= -I${.CURDIR}/../../../sys/cddl/contrib/opensolaris/uts/common/sys
  CFLAGS+= -I${.CURDIR}/../../../sys/cddl/contrib/opensolaris/common/zfs
  
@@ -27,10 +25,8 @@ Index: zfsutils/cddl/sbin/zfs/Makefile
 +.endif
  
  .include <bsd.prog.mk>
-Index: zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
-===================================================================
---- zfsutils.orig/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
-+++ zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
+--- a/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
++++ b/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
 @@ -58,7 +58,9 @@
  #include <sys/types.h>
  #include <time.h>
@@ -41,7 +37,7 @@ Index: zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
  
  #include <libzfs.h>
  #include <libzfs_core.h>
-@@ -105,8 +107,10 @@ static int zfs_do_hold(int argc, char **
+@@ -105,8 +107,10 @@
  static int zfs_do_holds(int argc, char **argv);
  static int zfs_do_release(int argc, char **argv);
  static int zfs_do_diff(int argc, char **argv);
@@ -52,7 +48,7 @@ Index: zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
  static int zfs_do_bookmark(int argc, char **argv);
  
  /*
-@@ -134,8 +138,10 @@ typedef enum {
+@@ -134,8 +138,10 @@
  	HELP_GET,
  	HELP_INHERIT,
  	HELP_UPGRADE,
@@ -63,7 +59,7 @@ Index: zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
  	HELP_LIST,
  	HELP_MOUNT,
  	HELP_PROMOTE,
-@@ -211,8 +217,10 @@ static zfs_command_t command_table[] = {
+@@ -211,8 +217,10 @@
  	{ "release",	zfs_do_release,		HELP_RELEASE		},
  	{ "diff",	zfs_do_diff,		HELP_DIFF		},
  	{ NULL },
@@ -74,7 +70,7 @@ Index: zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
  };
  
  #define	NCOMMAND	(sizeof (command_table) / sizeof (command_table[0]))
-@@ -248,10 +256,12 @@ get_usage(zfs_help_t idx)
+@@ -248,10 +256,12 @@
  	case HELP_UPGRADE:
  		return (gettext("\tupgrade [-v]\n"
  		    "\tupgrade [-r] [-V version] <-a | filesystem ...>\n"));
@@ -87,7 +83,7 @@ Index: zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
  	case HELP_LIST:
  		return (gettext("\tlist [-Hp] [-r|-d max] [-o property[,...]] "
  		    "[-s property]...\n\t    [-S property]... [-t type[,...]] "
-@@ -6480,6 +6490,7 @@ zfs_do_unshare(int argc, char **argv)
+@@ -6480,6 +6490,7 @@
  	return (unshare_unmount(OP_SHARE, argc, argv));
  }
  
@@ -95,7 +91,7 @@ Index: zfsutils/cddl/contrib/opensolaris/cmd/zfs/zfs_main.c
  /*
   * Attach/detach the given dataset to/from the given jail
   */
-@@ -6541,6 +6552,7 @@ zfs_do_unjail(int argc, char **argv)
+@@ -6541,6 +6552,7 @@
  
  	return (do_jail(argc, argv, 0));
  }

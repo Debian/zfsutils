@@ -30,7 +30,7 @@ endif
 
 full_version	:= $(shell dpkg-parsechangelog | grep ^Version: | sed -e 's/^.*: //g')
 tar_version	:= $(shell echo $(full_version) | sed -e 's/-.*//g')
-svn_revision	:= $(shell echo $(full_version) | sed -e 's/.*~svn\([0-9]*\)-[0-9]*/\1/g')
+svn_revision	:= $(shell echo $(full_version) | sed -e 's/.*~svn\([0-9]*\)[+-].*/\1/g')
 version		:= $(shell echo $(full_version) | sed -e 's/[~+-].*//g')
 major           := $(shell echo $(version) | sed -e 's/\..*//g')
 revision	:= $(shell echo $(full_version) | sed -e 's/^[^+-]*//g')
@@ -85,7 +85,7 @@ get-orig-source:
 	         cddl/usr.bin/ztest \
 	         cddl/usr.sbin/zdb \
 	         ; do \
-	    svn export -r $(svn_revision) $(SVN)/$$i $(ORIGDIR)/$$i ; \
+	    svn export --ignore-keywords -r $(svn_revision) $(SVN)/$$i $(ORIGDIR)/$$i || exit ; \
 	done
 	tar --numeric-owner --owner 0 --group 0 -czf ../$(TARNAME) $(ORIGDIR)
 	rm -rf $(ORIGDIR)
