@@ -5,7 +5,7 @@ Forwarded: no
 
 --- a/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_import.c
 +++ b/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_import.c
-@@ -1063,23 +1063,19 @@
+@@ -1069,23 +1069,19 @@
  		return;
  	}
  	/* this file is too small to hold a zpool */

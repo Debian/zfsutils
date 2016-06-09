@@ -3,8 +3,8 @@ See PR misc/162519
 
 --- a/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_import.c
 +++ b/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_import.c
-@@ -1169,7 +1169,7 @@
- 		int dfd;
+@@ -1174,7 +1174,7 @@
+ 		DIR *dirp;
  
  		/* use realpath to normalize the path */
 -		if (realpath(dir[i], path) == 0) {

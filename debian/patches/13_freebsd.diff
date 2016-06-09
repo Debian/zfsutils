@@ -1,0 +1,15 @@
+Date: Fri, 10 Jun 2016 00:14:38 +0100
+From: Steven Chamberlain <steven@pyro.eu.org>
+Subject: use __FreeBSD_kernel__ macro as needed
+
+--- a/sys/cddl/contrib/opensolaris/common/nvpair/opensolaris_nvpair.c
++++ b/sys/cddl/contrib/opensolaris/common/nvpair/opensolaris_nvpair.c
+@@ -44,7 +44,7 @@
+ #endif
+ #define	skip_whitespace(p)	while ((*(p) == ' ') || (*(p) == '\t')) p++
+ 
+-#if defined(__FreeBSD__) && !defined(_KERNEL)
++#if defined(__FreeBSD_kernel__) && !defined(_KERNEL)
+ /*
+  * libnvpair is the lowest commen denominator for ZFS related libraries,
+  * defining aok here makes it usable by all ZFS related libraries

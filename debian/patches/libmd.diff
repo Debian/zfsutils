@@ -1,0 +1,14 @@
+Date: Fri, 10 Jun 2016 00:03:19 +0100
+From: Steven Chamberlain <steven@pyro.eu.org>
+Subject: use system sha2.h from libmd
+
+--- a/cddl/compat/opensolaris/include/sha2.h
++++ b/cddl/compat/opensolaris/include/sha2.h
+@@ -29,6 +29,7 @@
+ #ifndef _OPENSOLARIS_SHA2_H_
+ #define _OPENSOLARIS_SHA2_H_
+ 
++#include_next <sha2.h>
+ #include_next <sha256.h>
+ 
+ #define	SHA256Init(c)		SHA256_Init(c)

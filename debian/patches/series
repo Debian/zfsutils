@@ -3,9 +3,9 @@
 # Mergeable material
 compat_opensolaris.diff
 disable_libjail.diff
-gratuitous_dependencies.diff
 #manpage_hyphens.diff
 assfail_protection.diff
+13_freebsd.diff
 14_bootloader_advice.diff
 
 # Other patches that might or might not be mergeable
@@ -21,3 +21,5 @@ missing_includes.diff
 match_glibc_idtype.diff
 bug762199.patch
 bug653929.diff
+libmd.diff
+noinline.diff

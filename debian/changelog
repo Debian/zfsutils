@@ -1,6 +1,23 @@
-zfsutils (10.1~svn272500+ds1-1) UNRELEASED; urgency=medium
+zfsutils (10.3~svn296373-1) UNRELEASED; urgency=medium
 
   [ Steven Chamberlain ]
+  * New upstream snapshot of 10.3-RELEASE
+  * Remove obsolete patch:
+    - gratuitous_dependencies.diff
+  * Refresh patches:
+    - disable_libjail.diff
+    - 14_bootloader_advice.diff
+    - ulong_t.diff
+    - solaris_rlim64_t.diff
+    - 15_pthread_compat.diff
+    - fix_realpath_abuse.diff
+    - makefile.diff
+    - bug762199.patch
+    - bug653929.diff
+  * New patches:
+    - 13_freebsd.diff: use __FreeBSD_kernel__ macro as needed
+    - libmd.diff: use system sha2.h from libmd
+    - noinline.diff: convert to using __attribute__ keyword
   * Update svn_revision regex to allow +suffix
   * svn export with --ignore-keywords and re-pack upstream source
   * Refresh patch debian/patches/disable_libjail.diff

@@ -11,7 +11,7 @@ another buffer instead.
 
 --- a/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_pool.c
 +++ b/cddl/contrib/opensolaris/lib/libzfs/common/libzfs_pool.c
-@@ -3404,7 +3404,7 @@
+@@ -3364,7 +3364,7 @@
  {
  	char *path, *devid;
  	uint64_t value;
@@ -20,7 +20,7 @@ another buffer instead.
  	vdev_stat_t *vs;
  	uint_t vsc;
  	int have_stats;
-@@ -3516,9 +3516,9 @@
+@@ -3476,9 +3476,9 @@
  
  			verify(nvlist_lookup_uint64(nv, ZPOOL_CONFIG_ID,
  			    &id) == 0);

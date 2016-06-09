@@ -1,0 +1,48 @@
+Date: Fri, 10 Jun 2016 00:04:19 +0100
+From: Steven Chamberlain <steven@pyro.eu.org>
+Subject: convert to using __attribute__ keyword
+
+--- a/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/arc.c
++++ b/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/arc.c
+@@ -3539,7 +3539,7 @@
+ extern kmem_cache_t	*zio_data_buf_cache[];
+ extern kmem_cache_t	*range_seg_cache;
+ 
+-static __noinline void
++static __attribute__((noinline)) void
+ arc_kmem_reap_now(void)
+ {
+ 	size_t			i;
+--- a/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/txg.c
++++ b/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/txg.c
+@@ -354,7 +354,7 @@
+  * On return, the transaction group has reached a stable state in which it can
+  * then be passed off to the syncing context.
+  */
+-static __noinline void
++static __attribute__((noinline)) void
+ txg_quiesce(dsl_pool_t *dp, uint64_t txg)
+ {
+ 	tx_state_t *tx = &dp->dp_tx;
+--- a/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/vdev_queue.c
++++ b/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/vdev_queue.c
+@@ -520,7 +520,7 @@
+ 	}
+ }
+ 
+-static __noinline int
++static __attribute__((noinline)) int
+ vdev_queue_max_async_writes(spa_t *spa)
+ {
+ 	int writes;
+--- a/sys/cddl/contrib/opensolaris/uts/common/sys/dtrace_impl.h
++++ b/sys/cddl/contrib/opensolaris/uts/common/sys/dtrace_impl.h
+@@ -1273,7 +1273,7 @@
+ #if defined(sun)
+ extern uint64_t dtrace_getarg(int, int);
+ #else
+-extern uint64_t __noinline dtrace_getarg(int, int);
++extern uint64_t __attribute__((noinline)) dtrace_getarg(int, int);
+ #endif
+ extern greg_t dtrace_getfp(void);
+ extern int dtrace_getipl(void);
