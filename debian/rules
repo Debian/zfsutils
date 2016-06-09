@@ -1,25 +1,44 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 # Sample debian/rules that uses debhelper.
-SHELL=bash
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
+export SHELL = bash
 
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
-CFLAGS = -Wall -Wno-unknown-pragmas -g -pipe -fPIC -I. \
-         -D_GNU_SOURCE -DNEED_SOLARIS_BOOLEAN \
-	-isystem /usr/include/freebsd \
-	-Werror=implicit-function-declaration \
-	$(NULL)
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
 
-ifneq (,$(filter noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O0
-else
-	CFLAGS += -O2
+full_version	:= $(shell dpkg-parsechangelog | grep ^Version: | sed -e 's/^.*: //g')
+tar_version	:= $(shell echo $(full_version) | sed -e 's/-.*//g')
+svn_revision	:= $(shell echo $(full_version) | sed -e 's/.*~svn\([0-9]*\)[+-].*/\1/g')
+version		:= $(shell echo $(full_version) | sed -e 's/[~+-].*//g')
+major		:= $(shell echo $(version) | sed -e 's/\..*//g')
+revision	:= $(shell echo $(full_version) | sed -e 's/^[^+-]*//g')
+
+include /usr/share/dpkg/architecture.mk
+
+# Determine host architecture compiler
+ifeq ($(origin CC),default)
+CC := $(DEB_HOST_GNU_TYPE)-gcc
 endif
+ifeq ($(origin CXX),default)
+CXX := $(DEB_HOST_GNU_TYPE)-g++
+endif
+
+# Use hardening flags
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# Pre-define CFLAGS, for hardening, debug and optimisation level
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+CFLAGS += -Wall -Wno-unknown-pragmas -g -pipe -fPIC -I. \
+	-D_GNU_SOURCE -DNEED_SOLARIS_BOOLEAN \
+	-Werror=implicit-function-declaration \
+	-isystem /usr/include/freebsd \
+	$(NULL)
 
 ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 	NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
@@ -28,21 +47,15 @@ ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 	BSD_MAKEFLAGS += -j$(NUMJOBS)
 endif
 
-full_version	:= $(shell dpkg-parsechangelog | grep ^Version: | sed -e 's/^.*: //g')
-tar_version	:= $(shell echo $(full_version) | sed -e 's/-.*//g')
-svn_revision	:= $(shell echo $(full_version) | sed -e 's/.*~svn\([0-9]*\)[+-].*/\1/g')
-version		:= $(shell echo $(full_version) | sed -e 's/[~+-].*//g')
-major           := $(shell echo $(version) | sed -e 's/\..*//g')
-revision	:= $(shell echo $(full_version) | sed -e 's/^[^+-]*//g')
-
-#SVN		:= https://svn0.us-west.freebsd.org/base/release/$(version).0
-SVN		:= https://svn0.us-west.freebsd.org/base/releng/$(version)
-#SVN		:= https://svn0.us-west.freebsd.org/base/stable/$(major)
-#SVN		:= https://svn0.us-west.freebsd.org/base/head
+SVN_BASE	:= https://svn.freebsd.org/base
+#SVN		:= $(SVN_BASE)/release/$(version).0
+SVN		:= $(SVN_BASE)/releng/$(version)
+#SVN		:= $(SVN_BASE)/stable/$(major)
+#SVN		:= $(SVN_BASE)/head
 
 SOURCE = zfsutils
 ORIGDIR = $(SOURCE)-$(tar_version)
-TARNAME = $(SOURCE)_$(tar_version).orig.tar.gz
+TARNAME = $(SOURCE)_$(tar_version).orig.tar.xz
 
 PATH := /usr/lib/freebsd:$(PATH)
 DESTDIR = $(CURDIR)/debian/tmp
@@ -86,7 +99,16 @@ get-orig-source:
 	         ; do \
 	    svn export --ignore-keywords -r $(svn_revision) $(SVN)/$$i $(ORIGDIR)/$$i || exit ; \
 	done
-	tar --numeric-owner --owner 0 --group 0 -czf ../$(TARNAME) $(ORIGDIR)
+	# Clamp timestamps to be no newer than last changelog entry, see
+	# https://wiki.debian.org/ReproducibleBuilds/TimestampsInTarball
+	find $(ORIGDIR) -newermt "@$(SOURCE_DATE_EPOCH)" -print0 \
+	 | xargs -0r touch --no-dereference --date="@$(SOURCE_DATE_EPOCH)"
+	# Create tarball with files sorted in a stable order, see
+	# https://wiki.debian.org/ReproducibleBuilds/FileOrderInTarballs
+	find $(ORIGDIR) -print0 | LC_ALL=C sort -z \
+	 | tar --null --no-recursion --files-from - \
+	    --numeric-owner --owner 0 --group 0 \
+	    -cJf ../$(TARNAME)
 	rm -rf $(ORIGDIR)
 
 build: build-arch build-indep
