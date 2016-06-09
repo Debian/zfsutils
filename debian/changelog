@@ -21,11 +21,8 @@ zfsutils (10.3~svn296373-1) UNRELEASED; urgency=medium
   * Avoid gratuitously linking against bsdxml/expat:
     - makefile.diff
   * Update svn_revision regex to allow +suffix
-  * svn export with --ignore-keywords and re-pack upstream source
-  * Refresh patch debian/patches/disable_libjail.diff
+  * svn export with --ignore-keywords
   * Abort on any error during svn export
-  * Rename ztest executable to zfstest, to avoid conflict with zutils
-    (Closes: #825268)
   * Now using debhelper compat v9
   * Now using Standards-Version 3.9.8 (no changes needed).
   * Add Build-Depends: dpkg-dev (>= 1.16.1.1) and use buildflags.mk
@@ -36,6 +33,8 @@ zfsutils (10.3~svn296373-1) UNRELEASED; urgency=medium
     (svn.freebsd.org).
   * Make get-orig-source tarball reproducible
   * Use the proper host architecture compiler
+  * Rename ztest executable to zfstest, to avoid conflict with zutils
+    (Closes: #825268)
 
   [ Guillem Jover ]
   * Switch to use system libmd
