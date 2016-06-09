@@ -33,6 +33,7 @@ zfsutils (10.3~svn296373-1) UNRELEASED; urgency=medium
     (svn.freebsd.org).
   * Make get-orig-source tarball reproducible
   * Use the proper host architecture compiler
+  * Build with -Wno-error=format-security, pending fixes
   * Rename ztest executable to zfstest, to avoid conflict with zutils
     (Closes: #825268)
 

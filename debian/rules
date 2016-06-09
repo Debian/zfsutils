@@ -37,6 +37,7 @@ include /usr/share/dpkg/buildflags.mk
 CFLAGS += -Wall -Wno-unknown-pragmas -g -pipe -fPIC -I. \
 	-D_GNU_SOURCE -DNEED_SOLARIS_BOOLEAN \
 	-Werror=implicit-function-declaration \
+	-Wno-error=format-security \
 	-isystem /usr/include/freebsd \
 	$(NULL)
 
