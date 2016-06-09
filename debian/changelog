@@ -18,6 +18,8 @@ zfsutils (10.3~svn296373-1) UNRELEASED; urgency=medium
     - 13_freebsd.diff: use __FreeBSD_kernel__ macro as needed
     - libmd.diff: use system sha2.h from libmd
     - noinline.diff: convert to using __attribute__ keyword
+  * Avoid gratuitously linking against bsdxml/expat:
+    - makefile.diff
   * Update svn_revision regex to allow +suffix
   * svn export with --ignore-keywords and re-pack upstream source
   * Refresh patch debian/patches/disable_libjail.diff

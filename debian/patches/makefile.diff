@@ -121,23 +121,23 @@
  CFLAGS+= -I${.CURDIR}/../../../sys/cddl/compat/opensolaris
 --- a/cddl/lib/libzfs/Makefile
 +++ b/cddl/lib/libzfs/Makefile
-@@ -10,9 +10,15 @@
+@@ -10,8 +10,14 @@
  	${LIBAVL} ${LIBZFS_CORE} ${LIBUUTIL} ${LIBBSDXML} ${LIBGEOM} \
  	${LIBNVPAIR} ${LIBZ}
  
 -LDADD=	-lmd -lpthread -lumem -lutil -luutil -lm -lnvpair -lavl \
+-	-lbsdxml -lgeom -lnvpair -lz -lzfs_core
 +LDADD=	-lmd -lpthread -lumem -luutil -lm -lnvpair \
- 	-lbsdxml -lgeom -lnvpair -lz -lzfs_core
- 
++	-lgeom -lnvpair -lz -lzfs_core
++
 +LDADD+= -lbsd -lm -luutil -lnvpair -lgeom
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libzfs_core
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libumem
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libnvpair
 +LDADD+= -L${.CURDIR}/../../../cddl/lib/libuutil
-+
+ 
  SRCS=	deviceid.c \
  	fsshare.c \
- 	mkdirp.c \
 --- a/cddl/lib/libzpool/Makefile
 +++ b/cddl/lib/libzpool/Makefile
 @@ -58,7 +58,11 @@
