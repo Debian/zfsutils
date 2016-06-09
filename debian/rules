@@ -168,7 +168,8 @@ clean:
 	$(PMAKE) -C $(CURDIR)/cddl/lib/libzpool clean
 	$(PMAKE) -C $(CURDIR)/cddl/lib/libavl clean
 	$(PMAKE) -C $(CURDIR)/cddl/usr.sbin/zdb clean
-	$(PMAKE) -C $(CURDIR)/cddl/usr.bin/ztest clean
+	$(PMAKE) -C $(CURDIR)/cddl/usr.bin/ztest clean && \
+	 rm -f $(CURDIR)/cddl/usr.bin/ztest/zfstest
 	$(PMAKE) -C $(CURDIR)/cddl/usr.bin/zinject clean
 
 	rm -f *stamp
