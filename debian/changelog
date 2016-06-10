@@ -1,4 +1,4 @@
-zfsutils (10.3~svn296373-1) UNRELEASED; urgency=medium
+zfsutils (10.3~svn296373-1) experimental; urgency=medium
 
   [ Steven Chamberlain ]
   * New upstream snapshot of 10.3-RELEASE
@@ -38,7 +38,7 @@ zfsutils (10.3~svn296373-1) UNRELEASED; urgency=medium
     (Closes: #825268)
 
   [ Guillem Jover ]
-  * Switch to use system libmd
+  * Switch to use system libmd (Closes: #816764)
 
  -- Steven Chamberlain <steven@pyro.eu.org>  Mon, 30 May 2016 14:11:59 +0100
 
