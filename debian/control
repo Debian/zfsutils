@@ -17,9 +17,9 @@ Build-Depends: debhelper (>= 9),
  zlib1g-dev,
  freebsd-glue (>= 0.1.8~),
  systemtap-sdt-dev
-Vcs-Browser: http://anonscm.debian.org/viewvc/glibc-bsd/trunk/zfsutils/
-Vcs-Svn: svn://anonscm.debian.org/glibc-bsd/trunk/zfsutils/
 Standards-Version: 3.9.8
+Vcs-Browser: https://salsa.debian.org/kfreebsd-team/zfsutils
+Vcs-Git: https://salsa.debian.org/kfreebsd-team/zfsutils.git
 
 Package: libuutil2
 Section: libs
